@@ -6,8 +6,12 @@ class CmdExecutor {
     'create': () => CreateCmd(),
   };
 
-  static void execute(String cmd, List<String> args) {
-    var commandConstructor = commands[cmd];
+  static void execute(List<String> args) {
+    if (args.isEmpty) {
+      print("Command not found");
+      return;
+    }
+    var commandConstructor = commands[args[0]];
     if (commandConstructor != null) {
       var commandInstance = commandConstructor();
       commandInstance.execute(args);
